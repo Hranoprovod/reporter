@@ -79,8 +79,12 @@ func (r *Reporter) PrintAPISearchResult(nl shared.APINodeList) error {
 
 // PrintAPINode prints single API result
 func (r *Reporter) PrintAPINode(n shared.APINode) error {
-	_, err := fmt.Fprintln(r.output, n.Name)
-	return err
+	fmt.Fprintln(r.output, n.Name + ":")
+	fmt.Fprintf(r.output, "  calories: %0.3f\n", n.Calories)
+	fmt.Fprintf(r.output, "  fat: %0.3f\n", n.Fat)
+	fmt.Fprintf(r.output, "  carbohydrate: %0.3f\n", n.Carbohydrate)
+	fmt.Fprintf(r.output, "  protein: %0.3f\n", n.Protein)
+	return nil
 }
 
 func (r *Reporter) cNum(num float32) string {

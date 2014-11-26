@@ -10,7 +10,7 @@ import (
 func TestReporter(t *testing.T) {
 	Convey("Given reporter", t, func() {
 		var b bytes.Buffer
-		rp := NewReporter(DefaultOptions(), &b)
+		rp := NewReporter(NewDefaultOptions(), &b)
 		Convey("Prints list of API results", func() {
 			nl := shared.APINodeList{
 				shared.APINode{
@@ -20,8 +20,16 @@ func TestReporter(t *testing.T) {
 					Name: "test2",
 				},
 			}
-			expected := `test1
-test2
+			expected := `test1:
+  calories: 0.000
+  fat: 0.000
+  carbohydrate: 0.000
+  protein: 0.000
+test2:
+  calories: 0.000
+  fat: 0.000
+  carbohydrate: 0.000
+  protein: 0.000
 `
 			err := rp.PrintAPISearchResult(nl)
 			So(err, ShouldBeNil)
