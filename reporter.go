@@ -50,7 +50,7 @@ type Reporter struct {
 }
 
 // DefaultOptions returns the default reporter options
-func DefaultOptions() *Options {
+func NewDefaultOptions() *Options {
 	return &Options{
 		false, 
 		false,
