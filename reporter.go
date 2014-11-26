@@ -95,27 +95,27 @@ func (r *Reporter) cNum(num float32) string {
 	return fmt.Sprintf("%10.2f", num)
 }
 
-func (r *Reporter) printDate(ts time.Time) {
+func (r *Reporter) PrintDate(ts time.Time) {
 	fmt.Fprintf(r.output, "%s\n", ts.Format(r.options.DateFormat))
 }
 
-func (r *Reporter) printElement(element *shared.Element) {
+func (r *Reporter) PrintElement(element *shared.Element) {
 	fmt.Fprintf(r.output, "\t%-27s :%s\n", element.Name, r.cNum(element.Val))
 }
 
-func (r *Reporter) printIngredient(name string, value float32) {
+func (r *Reporter) PrintIngredient(name string, value float32) {
 	fmt.Fprintf(r.output, "\t\t%20s %s\n", name, r.cNum(value))
 }
 
-func (r *Reporter) printTotalHeader() {
+func (r *Reporter) PrintTotalHeader() {
 	fmt.Fprintf(r.output, "\t-- %s %s\n", "TOTAL ", strings.Repeat("-", 52))
 }
 
-func (r *Reporter) printTotalRow(name string, pos float32, neg float32) {
+func (r *Reporter) PrintTotalRow(name string, pos float32, neg float32) {
 	fmt.Fprintf(r.output, "\t\t%20s %s %s =%s\n", name, r.cNum(pos), r.cNum(neg), r.cNum(pos+neg))
 }
 
-func (r *Reporter) printSingleElementRow(ts time.Time, name string, pos float32, neg float32) {
+func (r *Reporter) PrintSingleElementRow(ts time.Time, name string, pos float32, neg float32) {
 	format := "%s %20s %10.2f %10.2f =%10.2f\n"
 	if r.options.CSV {
 		format = "%s;\"%s\";%0.2f;%0.2f;%0.2f\n"
@@ -123,10 +123,10 @@ func (r *Reporter) printSingleElementRow(ts time.Time, name string, pos float32,
 	fmt.Fprintf(r.output, format, ts.Format(r.options.DateFormat), name, pos, -1*neg, pos+neg)
 }
 
-func (r *Reporter) printSingleFoodRow(ts time.Time, name string, val float32) {
+func (r *Reporter) PrintSingleFoodRow(ts time.Time, name string, val float32) {
 	fmt.Fprintf(r.output, "%s\t%s\t%0.2f\n", ts.Format(r.options.DateFormat), name, val)
 }
 
-func (r *Reporter) printUnresolvedRow(name string) {
+func (r *Reporter) PrintUnresolvedRow(name string) {
 	fmt.Fprintln(r.output, name)
 }
