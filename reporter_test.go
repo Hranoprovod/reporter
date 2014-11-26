@@ -10,7 +10,7 @@ import (
 func TestReporter(t *testing.T) {
 	Convey("Given reporter", t, func() {
 		var b bytes.Buffer
-		rp := NewReporter(&b)
+		rp := NewReporter(DefaultOptions(), &b)
 		Convey("Prints list of API results", func() {
 			nl := shared.APINodeList{
 				shared.APINode{
