@@ -41,6 +41,10 @@ type Options struct {
 	CSV bool
 	Color bool
 	DateFormat string
+	CaloriesLabel string
+	FatLabel string
+	CarbohydrateLabel string
+	ProteinLabel string
 }
 
 // Reporter is the main report structure
@@ -52,9 +56,13 @@ type Reporter struct {
 // DefaultOptions returns the default reporter options
 func NewDefaultOptions() *Options {
 	return &Options{
-		false, 
-		false,
-		"2006/01/02",
+		CSV: false, 
+		Color: false,
+		DateFormat: "2006/01/02",
+		CaloriesLabel: "calories",
+		FatLabel: "fat",
+		CarbohydrateLabel: "carbohydrate",
+		ProteinLabel: "protein",
 	}
 }
 
@@ -80,10 +88,10 @@ func (r *Reporter) PrintAPISearchResult(nl shared.APINodeList) error {
 // PrintAPINode prints single API result
 func (r *Reporter) PrintAPINode(n shared.APINode) error {
 	fmt.Fprintln(r.output, n.Name + ":")
-	fmt.Fprintf(r.output, "  calories: %0.3f\n", n.Calories)
-	fmt.Fprintf(r.output, "  fat: %0.3f\n", n.Fat)
-	fmt.Fprintf(r.output, "  carbohydrate: %0.3f\n", n.Carbohydrate)
-	fmt.Fprintf(r.output, "  protein: %0.3f\n", n.Protein)
+	fmt.Fprintf(r.output, "  %s: %0.3f\n", r.options.CaloriesLabel, n.Calories)
+	fmt.Fprintf(r.output, "  %s: %0.3f\n", r.options.FatLabel, n.Fat)
+	fmt.Fprintf(r.output, "  %s: %0.3f\n", r.options.CarbohydrateLabel, n.Carbohydrate)
+	fmt.Fprintf(r.output, "  %s: %0.3f\n", r.options.ProteinLabel, n.Protein)
 	return nil
 }
 
